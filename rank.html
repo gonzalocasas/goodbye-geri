@@ -1,0 +1,114 @@
+<!doctype html>
+<html class="no-js fullscreen" lang="" >
+
+<head>
+    <meta charset="utf-8">
+    <title>Goodbye Geri: Rank</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Architects+Daughter&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #000;
+        }
+
+        .container {
+            text-align: center;
+            width: 270px;
+            margin: 0 auto;
+        }
+
+        figure {
+            margin: 10px 0 0 0;
+            padding: 10px 0 20px 0;
+            background-color: white;
+        }
+        
+        figure img {
+            width: 256px;
+        }
+
+        figure figcaption {
+            margin: 0 0 0 10px;
+            text-align: left;
+            color: #8F8476;
+            font-family: 'Source Sans Pro', sans-serif;
+            font-weight: bold;
+            font-size: .8em;
+            min-height: 15px;
+        }
+
+
+    </style>
+    <meta name="theme-color" content="#fafafa">
+</head>
+
+<body>
+    <div class="container" id="sorted-list">
+    </div>
+
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.7.16.min.js"></script>
+    <script type="text/javascript">
+        AWS.config.update({
+            region: "eu-central-1"
+        });
+        AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+            IdentityPoolId: 'eu-central-1:eedf2bd2-80aa-4148-a190-ec675c832647',
+        });
+
+    </script>
+    <script type="text/javascript">
+        var dynamodb = new AWS.DynamoDB();
+        var docClient = new AWS.DynamoDB.DocumentClient();
+
+        window.onload = function () {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function () {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    var initialState = JSON.parse(xmlhttp.responseText);
+                    scanData(initialState);
+                }
+            };
+            xmlhttp.open("GET", 'data/data.json', true);
+            xmlhttp.send();
+        }
+
+        function scanData(initialState) {
+            var params = {
+                TableName: "votes",
+                ProjectionExpression: "pid, votes"
+            };
+
+            docClient.scan(params, onScan);
+
+            function onScan(err, data) {
+                if (err) {
+                    alert("Unable to scan the table: " + "\n" + JSON.stringify(err, undefined, 2));
+                    return;
+                }
+                let items = data.Items;
+                let allIds = initialState.map(i => i['name'].replace('img/', '').replace('-thumb.png', ''));
+                let allVotedIds = items.map(i => i.pid);
+
+                items.sort((a, b) => b.votes - a.votes);
+                for (let pid of allIds) {
+                    if (allVotedIds.indexOf(pid) < 0) {
+                        items.push({'pid': pid, 'votes': 0});
+                    }
+                }
+                let listOutput = '';
+
+                for (let pic of items) {
+                    listOutput += '<figure><a href="https://drive.google.com/uc?id=' + pic.pid + '">' + 
+                        '<img src="img/' + pic.pid + '-thumb.png"/></a>' + 
+                        '<figcaption>💖 ' + pic.votes + ' likes</figcaption>' +
+                        '</figure>';
+                }
+                document.getElementById('sorted-list').innerHTML = listOutput;
+            }
+        }
+</script>
+</body>
+
+</html>
