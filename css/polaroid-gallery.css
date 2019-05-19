@@ -81,12 +81,13 @@ figure img {
     height: auto;
     max-width: 100%;
     margin: 0 auto;
-    margin-bottom: 15px;
 }
 
 figure figcaption {
-    font-family: Comic Sans, Comic Sans MS, cursive;
-    color: #8F8476;
+    font-family: 'Architects Daughter', cursive;
+    color: #000;
+    font-size: 0.4em;
+    min-height: 15px;
 }
 
 .navbar {

@@ -29,7 +29,7 @@ var polaroidGallery = (function () {
             let picture_id = arr[i].name.replace('img/', '').replace('-thumb.png', '');
             out += '<div class="photo" id="' + i + '" data-pid="' + picture_id + '"><div class="side side-front"><figure>' +
                 '<img src="' + arr[i].name + '" alt="' + arr[i].name + '"/>' +
-                '<figcaption>' + arr[i].caption + '</figcaption>' +
+                '<figcaption>' + (arr[i].caption || ('Photo #' + (i+1)))+ '</figcaption>' +
                 '</figure></div><div class="side side-back"><div><p>' + arr[i].description + '</p></div></div></div>';
         }
         document.getElementById("gallery").innerHTML = out;
@@ -79,9 +79,20 @@ var polaroidGallery = (function () {
                         if ((currentData != dataSize[item.id]) || (currentData == null)) {
                             select(dataSize[item.id]);
                             shuffleAll();
-                        } else {
-                            item.classList.contains('flipped') === true ? item.classList.remove('flipped') : item.classList.add('flipped');
                         }
+                    });
+
+                    let tapedTwice = false;
+                    item.addEventListener('touchstart', function(event) {
+                        if (!tapedTwice) {
+                            tapedTwice = true;
+                            setTimeout(function () { tapedTwice = false; }, 300);
+                            return false;
+                        }
+                        event.preventDefault();
+
+                        // action on double tap goes below
+                        votePicture(currentData.item.dataset.pid);
                     });
 
                     shuffle(dataSize[item.id]);
@@ -190,7 +201,6 @@ var polaroidGallery = (function () {
             if (err) {
                 alert("Unable to update item: " + "\n" + JSON.stringify(err, undefined, 2));
             } else {
-                console.log('All ok!');
                 var vote_counter = document.getElementById('vote-counter');
                 if (data.Attributes && data.Attributes.votes) {
                     vote_counter.innerText = data.Attributes.votes;

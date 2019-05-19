@@ -4,9 +4,11 @@
 <head>
     <meta charset="utf-8">
     <title>Goodbye Geri</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Architects+Daughter&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" type="text/css" href="css/polaroid-gallery.css" />
     <meta name="theme-color" content="#fafafa">
 </head>
@@ -39,6 +41,8 @@
                 document.getElementById('previous').click();
             } else if (e.keyCode == 39) {
                 document.getElementById('next').click();
+            } else if (e.keyCode == 32) {
+                document.getElementById('vote').click();
             }
         };
 </script>
