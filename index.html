@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Architects+Daughter&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" type="text/css" href="css/polaroid-gallery.css" />
+    <link rel="stylesheet" type="text/css" href="css/polaroid-gallery.css?v2" />
     <meta name="theme-color" content="#fafafa">
 </head>
 
@@ -30,10 +30,10 @@
         });
 
     </script>
-    <script type="text/javascript" src="js/polaroid-gallery.js"></script>
+    <script type="text/javascript" src="js/polaroid-gallery.js?v2"></script>
     <script type="text/javascript">
         window.onload = function () { 
-            let gallery = new polaroidGallery("data/data.json");
+            let gallery = new polaroidGallery("data/data.json?v2");
         }
 
         document.onkeydown = function (e) {
