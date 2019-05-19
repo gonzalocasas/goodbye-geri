@@ -21,10 +21,12 @@
     <script src="https://sdk.amazonaws.com/js/aws-sdk-2.7.16.min.js"></script>
     <script type="text/javascript">
         AWS.config.update({
-            region: "eu-central-1",
-            accessKeyId: "removed",
-            secretAccessKey: "removed"
+            region: "eu-central-1"
         });
+        AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+            IdentityPoolId: 'eu-central-1:eedf2bd2-80aa-4148-a190-ec675c832647',
+        });
+
     </script>
     <script type="text/javascript" src="js/polaroid-gallery.js"></script>
     <script type="text/javascript">
