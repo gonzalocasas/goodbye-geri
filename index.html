@@ -1,0 +1,45 @@
+<!doctype html>
+<html class="no-js fullscreen" lang="" >
+
+<head>
+    <meta charset="utf-8">
+    <title>Goodbye Geri</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/polaroid-gallery.css" />
+    <meta name="theme-color" content="#fafafa">
+</head>
+
+<body class="fullscreen">
+    <div id="gallery" class="fullscreen"></div>
+    <div id="nav" class="navbar">
+        <button id="previous">&lt; Previous</button>
+        <button id="vote">💖 <span id='vote-counter'>0</span> likes</button>
+        <button id="next">Next &gt;</button>
+    </div>
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.7.16.min.js"></script>
+    <script type="text/javascript">
+        AWS.config.update({
+            region: "eu-central-1",
+            accessKeyId: "AKIAIW3ARZ2LZGGVMPQA",
+            secretAccessKey: "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"
+        });
+    </script>
+    <script type="text/javascript" src="js/polaroid-gallery.js"></script>
+    <script type="text/javascript">
+        window.onload = function () { 
+            let gallery = new polaroidGallery("data/data.json");
+        }
+
+        document.onkeydown = function (e) {
+            if (e.keyCode == 37) {
+                document.getElementById('previous').click();
+            } else if (e.keyCode == 39) {
+                document.getElementById('next').click();
+            }
+        };
+</script>
+</body>
+
+</html>
