@@ -90,6 +90,9 @@
                 let items = data.Items;
                 let allIds = initialState.map(i => i['name'].replace('img/', '').replace('-thumb.png', ''));
                 let allVotedIds = items.map(i => i.pid);
+                let totalVotes = items.reduce((acc, current) => acc + current.votes, 0);
+
+                console.log(totalVotes);
 
                 items.sort((a, b) => b.votes - a.votes);
                 for (let pid of allIds) {
