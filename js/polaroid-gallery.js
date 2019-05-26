@@ -133,7 +133,7 @@ var polaroidGallery = (function () {
         var x = (window.innerWidth - data.item.offsetWidth) / 2;
         var y = (window.innerHeight - navbarHeight - data.item.offsetHeight) / 2;
 
-        data.item.style.zIndex = 999;
+        data.item.style.zIndex = 900;
         data.item.style.WebkitTransform = 'translate(' + x + 'px,' + y + 'px) scale(' + scale + ',' + scale + ')';
         data.item.style.mozTransform = 'translate(' + x + 'px,' + y + 'px) scale(' + scale + ',' + scale + ')';
         data.item.style.msTransform = 'translate(' + x + 'px,' + y + 'px) scale(' + scale + ',' + scale + ')';
