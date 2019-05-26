@@ -86,8 +86,8 @@ var polaroidGallery = (function () {
 
                     item.addEventListener('click', function () {
                         if ((currentData != dataSize[item.id]) || (currentData == null)) {
+                            shuffle(currentData)
                             select(dataSize[item.id]);
-                            shuffleAll();
                         }
                     });
 
@@ -159,7 +159,8 @@ var polaroidGallery = (function () {
         var x = Math.floor((window.innerWidth - data.item.offsetWidth) * randomX);
         var y = Math.floor((window.innerHeight - data.item.offsetHeight - navbarHeight) * randomY);
 
-        data.item.style.zIndex = 1;
+        let zIndex = Math.floor(Math.random() * 300) + 10;
+        data.item.style.zIndex = zIndex;
         data.item.style.WebkitTransform = 'translate(' + x + 'px,' + y + 'px) rotate(' + rotRandomD + 'deg)';
         data.item.style.mozTransform = 'translate(' + x + 'px,' + y + 'px) rotate(' + rotRandomD + 'deg)';
         data.item.style.msTransform = 'translate(' + x + 'px,' + y + 'px) rotate(' + rotRandomD + 'deg)';
@@ -230,8 +231,8 @@ var polaroidGallery = (function () {
             if (currentIndex >= dataLength) {
                 currentIndex = 0
             }
+            shuffle(currentData);
             select(dataSize[currentIndex]);
-            shuffleAll();
         });
 
         previous.addEventListener('click', function () {
@@ -239,8 +240,8 @@ var polaroidGallery = (function () {
             if (currentIndex < 0) {
                 currentIndex = dataLength - 1
             }
+            shuffle(currentData);
             select(dataSize[currentIndex]);
-            shuffleAll();
         })
     }
 
