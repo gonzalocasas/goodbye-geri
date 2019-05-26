@@ -128,6 +128,9 @@ var polaroidGallery = (function () {
     }
 
     function select(data) {
+        document.getElementById('big-overlay').style.display = 'block';
+        document.getElementById('big-overlay').style.opacity = 0.9;
+
         var scale = 1.8;
 
         var x = (window.innerWidth - data.item.offsetWidth) / 2;
@@ -218,12 +221,21 @@ var polaroidGallery = (function () {
     }
 
     function navigation() {
-        var vote = document.getElementById('vote');
-        var next = document.getElementById('next');
-        var previous = document.getElementById('previous');
+        let vote = document.getElementById('vote');
+        let next = document.getElementById('next');
+        let previous = document.getElementById('previous');
+        let overlay = document.getElementById('big-overlay');
 
         vote.addEventListener('click', function () {
             votePicture(currentData.item.dataset.pid);
+        });
+
+        overlay.addEventListener('click', function() {
+            shuffle(currentData);
+            overlay.style.opacity = 0;
+            setTimeout(() => {
+                overlay.style.display = 'none';
+            }, 300);
         });
 
         next.addEventListener('click', function () {

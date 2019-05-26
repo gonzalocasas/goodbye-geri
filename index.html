@@ -9,12 +9,13 @@
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Architects+Daughter&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" type="text/css" href="css/polaroid-gallery.css?v5" />
+    <link rel="stylesheet" type="text/css" href="css/polaroid-gallery.css?v6" />
     <meta name="theme-color" content="#fafafa">
 </head>
 
 <body class="fullscreen">
     <div id="gallery" class="fullscreen"></div>
+    <div id="big-overlay" class="big-overlay"></div>
     <div id="nav" class="navbar">
         <button id="previous">&lt; Previous</button>
         <button id="vote">💖 <span id='vote-counter'>0</span> likes</button>
@@ -30,10 +31,10 @@
         });
 
     </script>
-    <script type="text/javascript" src="js/polaroid-gallery.js?v5"></script>
+    <script type="text/javascript" src="js/polaroid-gallery.js?v6"></script>
     <script type="text/javascript">
         window.onload = function () { 
-            let gallery = new polaroidGallery("data/data.json?v5");
+            let gallery = new polaroidGallery("data/data.json?v6");
         }
 
         document.onkeydown = function (e) {
