@@ -66,16 +66,7 @@ var polaroidGallery = (function () {
                     item.style.height = (fig.offsetHeight).toString() + 'px';
                     item.style.width = (fig.offsetWidth).toString() + 'px';
 
-                    var maxR = 45;
-                    var minR = -45;
-                    dataSize[item.id] = {
-                        item: item,
-                        width: item.offsetWidth,
-                        height: img.offsetHeight,
-                        randomX: Math.random(),
-                        randomY: Math.random(),
-                        randomRotation: Math.random() * (maxR - minR) + minR
-                    };
+                    dataSize[item.id] = {item: item, width: item.offsetWidth, height: img.offsetHeight};
 
                     if (first) {
                         currentData = dataSize[item.id];
@@ -152,9 +143,11 @@ var polaroidGallery = (function () {
     }
 
     function shuffle(data) {
-        var randomX = data.randomX;
-        var randomY = data.randomY;
-        var rotRandomD = data.randomRotation + (Math.random() * 10 + 5);
+        var randomX = Math.random();
+        var randomY = Math.random();
+        var maxR = 45;
+        var minR = -45;
+        var rotRandomD = Math.random() * (maxR - minR) + minR;
 
         var x = Math.floor((window.innerWidth - data.item.offsetWidth) * randomX);
         var y = Math.floor((window.innerHeight - data.item.offsetHeight - navbarHeight) * randomY);
