@@ -26,9 +26,6 @@ var polaroidGallery = (function () {
         var out = "";
         var i;
         for (i = 0; i < arr.length; i++) {
-            if (i > 160) {
-                break;
-            }
             let picture_id = arr[i].name.replace('img/', '').replace('-thumb.png', '');
             out += '<div class="photo" id="' + i + '" data-pid="' + picture_id + '"><div class="side side-front"><figure>' +
                 '<img src="' + arr[i].name + '" alt="' + arr[i].name + '"/>' +
